@@ -10,11 +10,11 @@ import { HeroDetailComponent } from './hero-detail/hero-detail.component'; // <-
   declarations: [
     AppComponent,
     HeroesComponent,
-    HeroDetailComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    HeroDetailComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
