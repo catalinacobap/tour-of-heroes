@@ -7,7 +7,6 @@ h2 {
   margin: auto;
   max-width: 1000px;
 
-  /* flexbox */
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -31,10 +30,9 @@ a {
   text-align: center;
   width: 100%;
   min-width: 70px;
-  margin: .5rem auto;
+  margin: 0.5rem auto;
   box-sizing: border-box;
 
-  /* flexbox */
   order: 0;
   flex: 0 1 auto;
   align-self: auto;

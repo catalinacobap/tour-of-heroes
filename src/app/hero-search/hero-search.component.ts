@@ -1,38 +1,27 @@
-import { Component, Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Component } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-
 import { Hero } from '../hero';
-
+import { HeroService } from '../hero.service';
 
 @Component({
   selector: 'app-hero-search',
   templateUrl: './hero-search.component.html',
-  styleUrls: ['./hero-search.component.css']
+  styleUrls: ['./hero-search.component.css'],
 })
-
 export class HeroSearchComponent {
-  private heroesUrl = 'http://127.0.0.1:5000/heroes'; 
   heroes: Observable<Hero[]> = of([]);
 
-  constructor(private http: HttpClient) {}
+  constructor(private heroService: HeroService) {}
 
   searchHeroes(term: string): void {
     if (!term.trim()) {
       this.heroes = of([]);
       return;
     }
-    this.heroes = this.http.get<Hero[]>(`${this.heroesUrl}?name=${term}`).pipe(
-      catchError(this.handleError<Hero[]>('searchHeroes', []))
-    );
-  }
-  
-
-  getHero(id: number): Observable<Hero> {
-    return this.http.get<Hero>(`${this.heroesUrl}/${id}`).pipe(
-      catchError(this.handleError<Hero>(`getHero id=${id}`))
-    );
+    this.heroes = this.heroService
+      .searchHeroes(term)
+      .pipe(catchError(this.handleError<Hero[]>('searchHeroes', [])));
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
@@ -42,4 +31,3 @@ export class HeroSearchComponent {
     };
   }
 }
-
